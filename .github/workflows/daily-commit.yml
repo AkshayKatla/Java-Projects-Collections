@@ -2,7 +2,8 @@ name: Daily Java Project Update
 
 on:
   schedule:
-    - cron: '52 17 * * *' # Runs every day at 09:00 UTC (approx. 2:30 PM IST)
+  # 18:35 UTC = 12:05 AM IST (UTC is 5h 30m behind IST)
+    - cron: '35 18 * * *'
   workflow_dispatch:      # Allows you to run it manually for testing
 
 jobs:
@@ -25,5 +26,5 @@ jobs:
           git config --global user.name "AkshayKatla"
           git config --global user.email "akshaykumarkatla@gmail.com"
           git add automation_log.txt
-          git commit -m "Automated daily update $(date)"
+          git commit -m "daily update $(date)"
           git push
