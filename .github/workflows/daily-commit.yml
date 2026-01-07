@@ -2,7 +2,7 @@ name: Daily Java Project Update
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # Runs every day at 09:00 UTC (approx. 2:30 PM IST)
+    - cron: '52 17 * * *' # Runs every day at 09:00 UTC (approx. 2:30 PM IST)
   workflow_dispatch:      # Allows you to run it manually for testing
 
 jobs:
