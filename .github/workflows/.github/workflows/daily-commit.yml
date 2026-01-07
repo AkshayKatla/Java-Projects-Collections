@@ -1,0 +1,29 @@
+name: Daily Java Project Update
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Runs every day at 09:00 UTC (approx. 2:30 PM IST)
+  workflow_dispatch:      # Allows you to run it manually for testing
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    # Crucial: gives the action permission to push code
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Make a change to a file
+        run: |
+          echo "Last automation run: $(date)" > automation_log.txt
+          # If you want to touch a specific Java file, change the line above.
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "AkshayKatla"
+          git config --global user.email "akshaykumarkatla@gmail.com"
+          git add automation_log.txt
+          git commit -m "Automated daily update $(date)"
+          git push
