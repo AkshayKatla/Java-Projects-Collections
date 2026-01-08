@@ -24,7 +24,7 @@ jobs:
         run: |
           git config --global user.name "AkshayKatla"
           # IMPORTANT: Change this to your actual GitHub email
-          git config --global user.email "akshaykatla@gmail.com" 
+          git config --global user.email "akshaykumarkatla@gmail.com" 
           git add streak.txt
           git commit -m "chore: daily streak update $(date)"
           git push
