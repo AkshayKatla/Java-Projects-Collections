@@ -1,0 +1,30 @@
+name: Daily Green Streak
+
+on:
+  schedule:
+    # 18:35 UTC = 12:05 AM IST
+    - cron: '35 18 * * *'
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Update Streak File
+        run: |
+          echo "Last contribution: $(date)" > streak.txt
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "AkshayKatla"
+          # IMPORTANT: Change this to your actual GitHub email
+          git config --global user.email "akshaykatla@example.com" 
+          git add streak.txt
+          git commit -m "chore: daily streak update $(date)"
+          git push
