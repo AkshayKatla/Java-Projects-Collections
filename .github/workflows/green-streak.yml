@@ -22,7 +22,7 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --global user.name "Akshay_katla4"
+          git config --global user.name "AkshayKatla"
           # IMPORTANT: Change this to your actual GitHub email
           git config --global user.email "akshaykumarkatla@gmail.com" 
           git add streak.txt
