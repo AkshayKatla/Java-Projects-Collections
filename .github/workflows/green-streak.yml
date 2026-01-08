@@ -2,7 +2,6 @@ name: Daily Green Streak
 
 on:
   schedule:
-    # 18:35 UTC = 12:05 AM IST
     - cron: '35 18 * * *'
   workflow_dispatch: 
 
@@ -15,16 +14,25 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          # This ensures we pull the latest history
+          fetch-depth: 0
 
       - name: Update Streak File
         run: |
-          echo "Last contribution: $(date)" > streak.txt
+          # Adding a random number ensures the file is ALWAYS different
+          echo "Last contribution: $(date) - ID: $RANDOM" >> streak.txt
 
       - name: Commit and Push
         run: |
           git config --global user.name "AkshayKatla"
-          # IMPORTANT: Change this to your actual GitHub email
-          git config --global user.email "akshaykumarkatla@gmail.com" 
+          git config --global user.email "akshaykumarkatla@gmail.com"
           git add streak.txt
-          git commit -m "chore: daily streak update $(date)"
-          git push
+          
+          # This check prevents the script from failing if there's nothing to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: daily streak update $(date)"
+            git push origin main
+          fi
